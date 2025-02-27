@@ -116,7 +116,7 @@ class HornyHaremModule(loader.Module):
             await message.edit("Решение найдено.")
             for i in range(len(clicks)):
                 if clicks[i] == 1:
-                    r = await client.get_messages(r.chat_id,ids=r.id)
+                    r = await self.client.get_messages(r.chat_id,ids=r.id)
                     await r.click(i)
             await message.edit("Готово.")
         else:
