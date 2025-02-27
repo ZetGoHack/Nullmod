@@ -109,7 +109,7 @@ class HornyHaremModule(loader.Module):
             return
         if pattern:
             await message.edit("<emoji document_id=5472146462362048818>💡</emoji>")
-            clicks = self.solution(pattern)
+            clicks = await self.solution(pattern)
             if not clicks:
                 await message.edit("Иди код трейси гений.")
                 return #*смачный пинок кодеру под зад.*
