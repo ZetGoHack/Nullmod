@@ -114,10 +114,10 @@ class HornyHaremModule(loader.Module):
                 await message.edit("Иди код трейси гений.")
                 return #*смачный пинок кодеру под зад.*
             await message.edit("Решение найдено.")
-            for i in len(clicks):
-                if clicks[i-1] == 1:
+            for i in range(len(clicks)):
+                if clicks[i] == 1:
                     r = await client.get_messages(r.chat_id,ids=r.id)
-                    await r.click(i-1)
+                    await r.click(i)
             await message.edit("Готово.")
         else:
             await message.edit("Ты ответил не на поле игры.")
