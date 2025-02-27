@@ -126,7 +126,7 @@ class HornyHaremModule(loader.Module):
     #///|
     #///|
     #///˅
-    async def solution(self, pole):
+    async def solution(pole):
         n = len(pole)
         for num in range(2**n):
             binary_string = bin(num)[2:].zfill(n)
