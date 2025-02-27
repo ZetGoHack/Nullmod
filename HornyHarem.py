@@ -109,7 +109,7 @@ class HornyHaremModule(loader.Module):
             return
         if pattern:
             await message.edit("<emoji document_id=5472146462362048818>💡</emoji>")
-            clicks = solution(pattern)
+            clicks = self.solution(pattern)
             if not clicks:
                 await message.edit("Иди код трейси гений.")
                 return #*смачный пинок кодеру под зад.*
@@ -126,7 +126,7 @@ class HornyHaremModule(loader.Module):
     #///|
     #///|
     #///˅
-    async def solution(pole):
+    async def solution(self, pole):
         n = len(pole)
         for num in range(2**n):
             binary_string = bin(num)[2:].zfill(n)
