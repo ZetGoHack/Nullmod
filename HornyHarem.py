@@ -72,7 +72,7 @@ class HornyHaremModule(loader.Module):
     ########Заработок########
     @loader.command()
     async def autobonusW(self, message):
-        """Автоматически собирает бонус каждые 4 часа"""
+        """Автоматически собирает бонус(а так же бонус за подписки) каждые 4 часа"""
         if self.bonus:
             self.bonus = False
             await message.edit("Автобонус выключен.")
