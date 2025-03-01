@@ -35,7 +35,6 @@ class WaiduHaremModule(loader.Module):
     }
     async def client_ready(self):
         self.bonus = False
-        me = await self._client.get_me()
         self.id = 6704842953
         self.lout = 0
     ########Заработок########
