@@ -18,12 +18,13 @@
 
 
 # meta developer: @nullmod
-
+from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
+from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
+from hikkatl.tl.functions.messages import ImportChatInviteRequest
 from hikkatl.tl.types import Message
 from .. import loader, utils
 import asyncio
 import time
-
 
 @loader.tds
 class HornyHaremModule(loader.Module):
@@ -72,7 +73,7 @@ class HornyHaremModule(loader.Module):
     ########Заработок########
     @loader.command()
     async def autobonusW(self, message):
-        """Автоматически собирает бонус(а так же бонус за подписки) каждые 4 часа"""
+        """Автоматически собирает бонус(а также бонус за подписку) каждые 4 часа"""
         if self.bonus:
             self.bonus = False
             await message.edit("Автобонус выключен.")
@@ -80,7 +81,50 @@ class HornyHaremModule(loader.Module):
         self.bonus = True
         await message.edit("Автобонус включён.")
         while self.bonus:
-            await self.client.send_message(7896566560,"/bonus")
+            async with self._client.conversation(self.id) as conv:
+                await conv.send_message("/bonus")
+                r = await conv.get_response()
+                if "Доступен бонус за подписки" in r.text:
+                    await conv.send_message("/start flyer_bonus")
+                    r = await conv.get_response()
+                    if "проверка пройдена" not in r.text:
+                        to_leave = []
+                        to_block = []
+                        if r.reply_markup:
+                            a = r.buttons
+                            for i in a:
+                                for button in i:
+                                    if button.url:
+                                        if "t.me/+" in button.url:
+                                            try:
+                                                await self.client(ImportChatInviteRequest(button.url.split("+")[-1]))
+                                            except:
+                                                await asyncio.sleep(2)
+                                                await self.client(JoinChannelRequest(button.url))
+                                        if "?" in button.url:
+                                            button.url = button.url.split("?")[0]
+                                        entity = await self.client.get_entity(button.url)
+                                        if hasattr(entity,'broadcast'):
+                                            await self.client(JoinChannelRequest(button.url))
+                                            to_leave.append(entity.id)
+                                        elif hasattr(entity,'bot'):
+                                            try:
+                                                await self.client(UnblockRequest(entity.username))
+                                            except:
+                                                print('блин')
+                                            await self.client.send_message(entity,"/start")
+                                            to_block.append(entity.username)
+                            flyer_messages = await message.client.get_messages("@Horny_GaremBot", limit=1)
+                            for m in flyer_messages:
+                                await asyncio.sleep(5)
+                                await m.click()
+                            for bot in to_block:
+                                await self.client(BlockRequest(bot))
+                                await self.client.delete_dialog(bot)
+                            for channel in to_leave:
+                                await self.client(LeaveChannelRequest(channel))
+
+
             await asyncio.sleep(14400)
 
     @loader.command()
