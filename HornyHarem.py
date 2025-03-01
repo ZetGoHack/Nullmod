@@ -38,7 +38,7 @@ class HornyHaremModule(loader.Module):
         self.outptt = True
         self.bonus = False
         me = await self._client.get_me()
-        self.id = 6704842953#7896566560
+        self.id = 7896566560
         self.last_time = 0
         self.lout = 0
 
