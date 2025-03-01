@@ -38,7 +38,7 @@ class HornyHaremModule(loader.Module):
         self.outptt = True
         self.bonus = False
         me = await self._client.get_me()
-        self.id = 7896566560
+        self.id = 6704842953#7896566560
         self.last_time = 0
         self.lout = 0
 
@@ -135,6 +135,7 @@ class HornyHaremModule(loader.Module):
                             await self.lightsoutW(m,r)
                             await m.delete()
                             self.lout = time.time()
+                            count += 1
                         else:
                             break
 
@@ -145,8 +146,9 @@ class HornyHaremModule(loader.Module):
     @loader.command()
     async def lightsoutW(self, message, r=None):
         """[ответ на соо с полем] Автоматически решает Lights Out"""
-        if message.is_reply:
-            r = await message.get_reply_message()
+        if message.is_reply or r:
+            if not r: 
+                r = await message.get_reply_message()
             if r.reply_markup:
                 a = r.buttons
                 pattern = []
