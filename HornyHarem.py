@@ -40,6 +40,7 @@ class HornyHaremModule(loader.Module):
         me = await self._client.get_me()
         self.id = 7896566560
         self.last_time = 0
+        self.lout = 0
 
     ########Ловец########
     @loader.watcher("only_messages","from_id=7896566560","only_media")
@@ -73,7 +74,7 @@ class HornyHaremModule(loader.Module):
     ########Заработок########
     @loader.command()
     async def autobonusW(self, message):
-        """Автоматически собирает бонус(а также бонус за подписку) каждые 4 часа"""
+        """Автоматически собирает бонус(а также бонус за подписку и отыгрывает 3 игры в /lout) каждые 4 часа"""
         if self.bonus:
             self.bonus = False
             await message.edit("Автобонус выключен.")
@@ -101,9 +102,10 @@ class HornyHaremModule(loader.Module):
                                             except:
                                                 await asyncio.sleep(2)
                                                 await self.client(JoinChannelRequest(button.url))
+                                        url = button.url
                                         if "?" in button.url:
-                                            button.url = button.url.split("?")[0]
-                                        entity = await self.client.get_entity(button.url)
+                                            url = button.url.split("?")[0]
+                                        entity = await self.client.get_entity(url)
                                         if hasattr(entity,'broadcast'):
                                             await self.client(JoinChannelRequest(button.url))
                                             to_leave.append(entity.id)
@@ -114,7 +116,7 @@ class HornyHaremModule(loader.Module):
                                                 print('блин')
                                             await self.client.send_message(entity,"/start")
                                             to_block.append(entity.username)
-                            flyer_messages = await message.client.get_messages("@Horny_GaremBot", limit=1)
+                            flyer_messages = await message.client.get_messages(self.id, limit=1)
                             for m in flyer_messages:
                                 await asyncio.sleep(5)
                                 await m.click()
@@ -123,12 +125,25 @@ class HornyHaremModule(loader.Module):
                                 await self.client.delete_dialog(bot)
                             for channel in to_leave:
                                 await self.client(LeaveChannelRequest(channel))
+                count = 0
+                if time.time()-self.lout > 86400:
+                    while count <= 3:
+                        await conv.send_message("/lout")
+                        r = await conv.get_response()
+                        if r.reply_markup:
+                            m = await r.respond(".")
+                            await self.lightsoutW(m,r)
+                            await m.delete()
+                            self.lout = time.time()
+                        else:
+                            break
+
 
 
             await asyncio.sleep(14400)
 
     @loader.command()
-    async def lightsoutW(self, message):
+    async def lightsoutW(self, message, r=None):
         """[ответ на соо с полем] Автоматически решает Lights Out"""
         if message.is_reply:
             r = await message.get_reply_message()
