@@ -85,6 +85,8 @@ class WaiduHaremModule(loader.Module):
                                             await self.client.send_message(entity,"/start")
                                             to_block.append(entity.username)
                             flyer_messages = await message.client.get_messages(self.id, limit=1)
+                            if self.wait_boost:
+                                await asyncio.sleep(120)
                             for m in flyer_messages:
                                 await asyncio.sleep(5)
                                 await m.click()
