@@ -42,6 +42,7 @@ class HornyHaremModule(loader.Module):
         self.last_time = 0
         self.lout = 0
         self.prohibid = []
+        self.Hell-nah-I-have-to-wait-cuz-boost = False #pizdecz peremennaya
 
     ########Ловец########
     @loader.watcher("only_messages","from_id=7896566560","only_media")
@@ -55,7 +56,8 @@ class HornyHaremModule(loader.Module):
                         await message.click()
                         msgs = await message.client.get_messages(message.chat_id, limit=4)
                         for msg in msgs:
-                            if self.outptt and msg.mentioned and "забрали" in msg.text:
+                            if self.outptt and msg.mentioned and "забрали" in msg.text:
+
                                 match = re.search(r", Вы забрали (.+?)\. Вайфу", msg.text)
                                 waifu = match.group(1)
                                 caption = f"{waifu} в вашем гареме!"
@@ -103,6 +105,7 @@ class HornyHaremModule(loader.Module):
                                 for button in i:
                                     if button.url:
                                         if "t.me/boost?" in button.url:
+                                            self.Hell-nah-I-have-to-wait-cuz-boost = True
                                             continue
                                         if "t.me/+" in button.url:
                                             try:
@@ -131,6 +134,8 @@ class HornyHaremModule(loader.Module):
                             for bot in to_block:
                                 await self.client(BlockRequest(bot))
                                 await self.client.delete_dialog(bot)
+                            if self.Hell-nah-I-have-to-wait-cuz-boost:
+                                await asyncio.sleep(120)
                             for channel in to_leave:
                                 await self.client(LeaveChannelRequest(channel))
                 count = 0
