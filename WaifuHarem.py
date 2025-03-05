@@ -47,10 +47,10 @@ class WaifuHarem(loader.Module):
         """Автоматически собирает бонус(а также бонус за подписку и отыгрывает 3 игры в /lout) каждые 4 часа"""
         if self.bonus:
             self.bonus = False
-            await message.edit("<emoji document_id=5388915455069015167>❎</emoji> Автобонус выключен.")
+            await message.edit(" Автобонус выключен.")
             return
         self.bonus = True
-        await message.edit("<emoji document_id=5388915455069015167>❎</emoji>  Автобонус включён.")
+        await message.edit("<emoji document_id=5389003252790480195>✅</emoji>  Автобонус включён.")
         while self.bonus:
             async with self._client.conversation(self.id) as conv:
                 await conv.send_message("/bonus")
