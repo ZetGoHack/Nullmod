@@ -47,12 +47,10 @@ class WaifuHarem(loader.Module):
         """Автоматически собирает бонус(а также бонус за подписку и отыгрывает 3 игры в /lout) каждые 4 часа"""
         if self.bonus:
             self.bonus = False
-            await message.edit("<emoji document_id=5388915455069015167>❎</emoji>
- Автобонус выключен.")
+            await message.edit("<emoji document_id=5388915455069015167>❎</emoji> Автобонус выключен.")
             return
         self.bonus = True
-        await message.edit("<emoji document_id=5388915455069015167>❎</emoji>
- Автобонус включён.")
+        await message.edit("<emoji document_id=5388915455069015167>❎</emoji>  Автобонус включён.")
         while self.bonus:
             async with self._client.conversation(self.id) as conv:
                 await conv.send_message("/bonus")
@@ -139,13 +137,11 @@ class WaifuHarem(loader.Module):
                         else:
                             None
             else:
-                await message.edit("<emoji document_id=5299030091735525430>❗️</emoji>
- Не вижу поля игры. Это точно то сообщение?")
+                await message.edit("<emoji document_id=5299030091735525430>❗️</emoji> Не вижу поля игры. Это точно то сообщение?")
                 return
              
         else:
-            await message.edit("<emoji document_id=5299030091735525430>❗️</emoji>
- Пропиши команду в ответ на игру.")
+            await message.edit("<emoji document_id=5299030091735525430>❗️</emoji> Пропиши команду в ответ на игру.")
             return
         if pattern:
             await message.edit("<emoji document_id=5472146462362048818>💡</emoji>")
@@ -158,11 +154,9 @@ class WaifuHarem(loader.Module):
                 if clicks[i] == 1:
                     r = await self.client.get_messages(r.chat_id,ids=r.id)
                     await r.click(i)
-            await message.edit("<emoji document_id=5395592707580127159>😎</emoji>
-Готово.")
+            await message.edit("<emoji document_id=5395592707580127159>😎</emoji> Готово.")
         else:
-            await message.edit("<emoji document_id=5299030091735525430>❗️</emoji>
- Ты ответил не на поле игры.")
+            await message.edit("<emoji document_id=5299030091735525430>❗️</emoji> Ты ответил не на поле игры.")
             return
     #///|
     #///|
