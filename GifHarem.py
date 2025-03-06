@@ -1,4 +1,4 @@
-__version__ = (1,0,2) ###Да, это -- копирка модуля HornyHarem. Я не виноват, что у разраба во всей связке ботов код одинаковый.🥰
+__version__ = (1,0,3) ###Да, это -- копирка модуля HornyHarem. Я не виноват, что у разраба во всей связке ботов код одинаковый.🥰
 
 #░░░░░░░░░░░░░░░░░░░░░░
 #░░░░░░░░░░██░░██░░░░░░
@@ -50,7 +50,7 @@ class GifHarem(loader.Module):
     @loader.watcher("only_messages","only_media")
     async def watcher(self, message: Message):
         """Watcher"""
-        if self.state && message.sender_id == self.id:
+        if self.state and message.sender_id == self.id:
             text = message.text.lower()
             if "заблудилась" in text:
                 if int(time.time()) - int(self.last_time) > 14400:
