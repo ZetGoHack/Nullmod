@@ -1,4 +1,4 @@
-__version__ = (1,3,2)
+__version__ = (1,3,3)
 #░░░░░░░░░░░░░░░░░░░░░░
 #░░░░░░░░░░██░░██░░░░░░
 #░░░░░░░░░████████░░░░░
@@ -49,7 +49,7 @@ class HornyHarem(loader.Module):
     @loader.watcher("only_messages","only_media")
     async def watcher(self, message: Message):
         """Watcher"""
-        if self.state && message.sender_id == self.id:
+        if self.state and message.sender_id == self.id:
             text = message.text.lower()
             if "заблудилась" in text and message.chat_id not in self.prohibid:
                 if int(time.time()) - int(self.last_time) > 14400:
