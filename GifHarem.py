@@ -20,7 +20,7 @@ __version__ = (1,0,5) ###Да, это -- копирка модуля HornyHarem.
 
 
 # meta developer: @nullmod
-
+ 
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from hikkatl.tl.functions.messages import ImportChatInviteRequest
