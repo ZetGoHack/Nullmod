@@ -216,7 +216,7 @@ class Chess(loader.Module):
                     {"text":"⚡ Блиц","action":"answer","message":"Блиц-Блиц - скорость без границ"}
                 ],
                 [
-                    {"text":"3 минуты","callback":self.time_handle,"args":(0.05,"3 минуты",nT,)},
+                    {"text":"3 минуты","callback":self.time_handle,"args":(3,"3 минуты",nT,)},
                     {"text":"5 минут","callback":self.time_handle,"args":(5,"5 минут",nT,)}
                 ],
                 [
