@@ -200,7 +200,7 @@ class Chess(loader.Module):
                                        {"text": "⚙️ Настройки", "callback": self.settings, "args":(nT,)}
                                    ],
                                    [
-                                       {"text": "❗ ВАЖНО","action":"answer","show_alert":True,"message":"В игре показаны фигуры в виде ASCII символов, но в тёмной теме фигуры едва различимы как минимум '♕♛'.\n\nДля удобного различия они были заменены на Q(бел) и q(чёрн)",}
+                                       {"text": "❗ ВАЖНО","action":"answer","show_alert":True,"message":"В игре фигуры показаны ASCII-символами, но в тёмной теме их трудно различить, особенно '♕' и '♛'.\n\nДля удобства они были заменены на Q (бел) и q (чёрн).",}
                                    ]
                                ]
                        )
@@ -320,7 +320,7 @@ class Chess(loader.Module):
                                        {"text": "⚙️ Настройки", "callback": self.settings, "args":(noTimer,)}
                                    ],
                                    [
-                                       {"text": "❗ ВАЖНО","action":"answer","show_alert":True,"message":"В игре показаны фигуры в виде ASCII символов, но в тёмной теме фигуры едва различимы как минимум '♕♛'.\n\nДля удобного различия они были заменены на Q(бел) и q(чёрн)",}
+                                       {"text": "❗ ВАЖНО","action":"answer","show_alert":True,"message":"В игре фигуры показаны ASCII-символами, но в тёмной теме их трудно различить, особенно '♕' и '♛'.\n\nДля удобства они были заменены на Q (бел) и q (чёрн).",}
                                    ]
                                ], 
                                disable_security = True, on_unload=self.outdated()
