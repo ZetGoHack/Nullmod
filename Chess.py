@@ -279,7 +279,14 @@ class Chess(loader.Module):
         self.style = self.style1 if style == 1 else self.style2
         self.Board = chess.Board()
         btns = []
-        await self.drawBoard()
+        # - - -
+        for row in range(1,9):
+            rows = []
+            for col in "ABCDEFGH":
+                coord = f"{col}{row}"
+                piece = self.Board.piece_at(chess.parse_square(coord.lower()))
+                self.board[coord] =  self.style[piece.symbol()] if piece else " "
+        # - - -
         self.Board = None
         for row in range(1,9):
             rows = []
@@ -288,6 +295,7 @@ class Chess(loader.Module):
                 rows.append({"text": f"{self.board[f'{col}{row}']}", "action":"answer", "message":"😨 Вот это фигура, да?"})
             btns.append(rows)
         btns = btns[::-1]
+        self.board = {}
         btns.append([{"text":"⤴️ Назад", "callback":self._style, "args":(nT,)}])
         await call.edit(text=f"🎛️ Выбран стиль: #{1 if self.style == self.style1 else 2}\n\nВот как он выглядит",reply_markup=btns)
         
