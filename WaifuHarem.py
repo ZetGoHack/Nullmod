@@ -161,7 +161,7 @@ class WaifuHarem(loader.Module):
                                                 try:
                                                     await self.client(ImportChatInviteRequest(button.url.split("+")[-1]))
                                                 except InviteRequestSentError: pass
-                                                await asyncio.sleep(3)
+                                                await asyncio.sleep(15)
                                                 try:
                                                     entity = await self.client.get_entity(url)
                                                     await m.respond(f"{entity}")
@@ -172,6 +172,8 @@ class WaifuHarem(loader.Module):
                                                     except: 
                                                         self.blockBot = False
                                                         continue
+                                                except Exception as e:
+                                                    await m.respond(str(e))
                                                 self.blockBot = False
                                                 alr = True
                                         except: continue
