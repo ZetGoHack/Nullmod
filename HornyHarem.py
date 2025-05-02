@@ -64,6 +64,7 @@ class HornyHarem(loader.Module):
     }
     async def client_ready(self):
         self.id = 7896566560
+        self.blockBot = False
         
     def getmarkup(self):
         return [
