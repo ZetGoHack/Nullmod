@@ -86,7 +86,7 @@ class WaifuHarem(loader.Module):
     @loader.loop(interval=1, autostart=True)
     async def check_loop(self):
         if self.config["ab"]:
-            if (not self.get("ABonus_time") or (time.time() - self.get("ABonus_time")) >= 3600*4):
+            if (not self.get("ABonus_time") or (time.time() - self.get("ABonus_time")) >= int(3600*3)):
                 await self.autobonus()
                 
     ########loop########
