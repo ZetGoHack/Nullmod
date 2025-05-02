@@ -65,6 +65,7 @@ class GifHarem(loader.Module):
     }
     async def client_ready(self):
         self.id = 7084965046
+        self.blockBot = False
         
     def getmarkup(self):
         return [
