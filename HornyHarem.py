@@ -1,4 +1,4 @@
-__version__ = (2,0,1)
+__version__ = (2,0,2)
 #░░░░░░░░░░░░░░░░░░░░░░
 #░░░░░░░░░░██░░██░░░░░░
 #░░░░░░░░░████████░░░░░
@@ -104,10 +104,20 @@ class HornyHarem(loader.Module):
                 
     ########loop########
 
-    ########Ловец########
-    @loader.watcher("only_messages","only_media")
+    ########Ловец | Блок ботов########
+    @loader.watcher("only_messages")
     async def watcher(self, message: Message):
         """Watcher"""
+        if self.blockBot:
+            bot = await self.client.get_entity(message.from_id)
+            if bot.bot:
+                botf = await self.client.get_fulluser(message.from_id)
+                if botf.full_user.settings.request_chat_title is not None:
+                    await self.client(BlockRequest(botf.users[0].id))
+                    await self.client.delete_dialog(botf.users[0].id)
+                    self.blockBot = False
+                    return
+                    
         if self.config["catch"] and message.sender_id == self.id and (not self.get("catcher_time") or int(time.time()) - int(self.get("catcher_time")) > 14400):
             if "заблудилась" in message.text.lower():
                 try:
