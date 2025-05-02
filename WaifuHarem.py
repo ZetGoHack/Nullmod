@@ -49,6 +49,7 @@ class WaifuHarem(loader.Module):
     }
     async def client_ready(self):
         self.id = 6704842953
+        self.blockBot = False
         
     def getmarkup(self):
         return [
