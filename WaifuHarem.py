@@ -133,7 +133,7 @@ class WaifuHarem(loader.Module):
                                 if button.url:
                                     alr = False # "уже зашёл"
                                     if "addlist/" in button.url: # добавление папок
-                                        slug = self.button.split("addlist/")[-1]
+                                        slug = self.button.url.split("addlist/")[-1]
                                         peers = await self.client(CheckChatlistInviteRequest(slug=slug))
                                         if peers:
                                             peers = peers.peers
@@ -164,7 +164,6 @@ class WaifuHarem(loader.Module):
                                                 await asyncio.sleep(3)
                                                 try:
                                                     entity = await self.client.get_entity(url)
-                                                    await m.respond(f"{entity}")
                                                 except ValueError:
                                                     try:
                                                         await asyncio.sleep(15)
@@ -172,6 +171,8 @@ class WaifuHarem(loader.Module):
                                                     except: 
                                                         self.blockBot = False
                                                         continue
+                                                except Exception as e:
+                                                    pass
                                                 self.blockBot = False
                                                 alr = True
                                         except: continue
@@ -197,7 +198,7 @@ class WaifuHarem(loader.Module):
                                         except: print("блин")
                                         await self.client.send_message(entity, "/start")
                                         to_block.append(entity.username)
-                        flyer_messages = await self.client.get_messages(m.chat_id, limit=1)
+                        flyer_messages = await self.client.get_messages(self.id, limit=1)
                         if wait_boost:
                             await asyncio.sleep(150)
                         for m in flyer_messages:
@@ -212,7 +213,7 @@ class WaifuHarem(loader.Module):
                         for channel in to_leave:
                             try:
                                 await self.client(LeaveChannelRequest(channel))
-                            except:
+                            except Exception as e:
                                 pass
                 count = 0
                 if not self.get("last_lout") or int(time.time()) - self.get("last_lout") > 43200:
