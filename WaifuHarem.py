@@ -1,4 +1,4 @@
-__version__ = (2,0,1)
+__version__ = (2,0,2)
 #░░░░░░░░░░██░░██░░░░░░
 #░░░░░░░░░████████░░░░░
 #░░░░░░░░░████████░░░░░
@@ -90,6 +90,20 @@ class WaifuHarem(loader.Module):
                 await self.autobonus()
                 
     ########loop########
+
+    ########Блок ботов########
+    @loader.watcher("only_messages")
+    async def watcher(self, message: Message):
+        """Watcher"""
+        if self.blockBot:
+            bot = await self.client.get_entity(message.from_id)
+            if bot.bot:
+                botf = await self.client.get_fulluser(message.from_id)
+                if botf.full_user.settings.request_chat_title is not None:
+                    await self.client(BlockRequest(botf.users[0].id))
+                    await self.client.delete_dialog(botf.users[0].id)
+                    self.blockBot = False
+                    return
                         
 
 
