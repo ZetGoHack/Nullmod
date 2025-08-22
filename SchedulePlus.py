@@ -38,7 +38,7 @@ class SchedulePlus(loader.Module):
             return await utils.answer(message, self.strings["too_many"])
 
         chat_id = message.chat_id
-        reply_message_id = message.reply_to.reply_to_msg_id if len(args) == 3 else None
+        reply_message_id = message.reply_to.reply_to_msg_id if len(args) == 3 and message.reply_to else None
         await utils.answer(message, self.strings["scheduled"])
 
         variables = {}
