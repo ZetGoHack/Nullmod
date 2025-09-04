@@ -21,7 +21,7 @@ __version__ = (1,1,2)
 # meta developer: @nullmod
 # requires: python-chess
 from hikkatl.tl.types import PeerUser
-import asyncio, random, chess, time
+import asyncio, html, random, chess, time
 from .. import loader, utils
 
 #######Таймер#######
@@ -106,7 +106,7 @@ class Chess(loader.Module):
             "R": "♖⚪", "N": "♘⚪", "B": "♗⚪", "Q": "♕⚪", "K": "♔⚪", "P": "♙⚪",
         }
         self.chsn = False
-        self.saymyname = (await self.client.get_me()).first_name
+        self.saymyname = html.escape((await self.client.get_me()).first_name)
         self.reverse = False
         self.timeName = "❌ Без часов"
         self.pTime = None
@@ -318,7 +318,7 @@ class Chess(loader.Module):
             r = await message.get_reply_message()
             opponent = r.sender
             self.opp_id = opponent.id
-            self.opp_name = opponent.first_name
+            self.opp_name = html.escape(opponent.first_name)
         else:
             args = utils.get_args(message)
             if len(args)==0:
@@ -329,10 +329,10 @@ class Chess(loader.Module):
                 if opponent.isdigit():
                     self.opp_id = int(opponent)
                     opponent = await self.client.get_entity(self.opp_id)
-                    self.opp_name = opponent.first_name
+                    self.opp_name = html.escape(opponent.first_name)
                 else:
                     opponent = await self.client.get_entity(opponent)
-                    self.opp_name = opponent.first_name
+                    self.opp_name = html.escape(opponent.first_name)
                     self.opp_id = opponent.id
             except:
                 await message.edit("❌ Я не нахожу такого пользователя")
