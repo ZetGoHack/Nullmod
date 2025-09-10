@@ -1,4 +1,4 @@
-__version__ = (1,1,0)
+__version__ = (1,1,1)
 #░░░███░███░███░███░███
 #░░░░░█░█░░░░█░░█░░░█░█
 #░░░░█░░███░░█░░█░█░█░█
@@ -18,6 +18,11 @@ from datetime import datetime, timedelta, timezone
 class SchedulePlus(loader.Module):
     """Планирование периодичных сообщений"""
     strings = {"name": "SchedulePlus",
+           "no_args": "<emoji document_id=5019523782004441717>❌</emoji> Invalid arguments",
+           "too_many": "<emoji document_id=5019523782004441717>❌</emoji> Maximum number of scheduled messages is 100.",
+           "scheduled": "<emoji document_id=5062291541624619917>✈️</emoji> Messages will be scheduled"}
+
+    strings_ru = {"name": "SchedulePlus",
                "no_args": "<emoji document_id=5019523782004441717>❌</emoji> Неверные аргументы",
                "too_many": "<emoji document_id=5019523782004441717>❌</emoji> Максимальное число отложенных сообщений - 100.",
                "scheduled": "<emoji document_id=5062291541624619917>✈️</emoji> Сообщения будут запланированы"}
@@ -38,7 +43,7 @@ class SchedulePlus(loader.Module):
             return await utils.answer(message, self.strings["too_many"])
 
         chat_id = message.chat_id
-        reply_message_id = message.reply_to.reply_to_msg_id if len(args) == 3 and message.reply_to else None
+        reply_message_id = resp.reply_to.reply_to_msg_id if resp.reply_to else None
         await utils.answer(message, self.strings["scheduled"])
 
         variables = {}
