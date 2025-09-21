@@ -261,7 +261,7 @@ class HaremManager(loader.Module):
                     return
             self.set(f"ab-t-{bot}", int(time.time()))
             if "Доступен бонус за подписки" in r.text:
-                await conv.send_message("/start flyer_bonus")
+                await conv.send_message("/start ad_bonus")
                 r = await conv.get_response()
                 if "проверка пройдена" not in r.text:
                     to_leave, to_block, folders, chats_in_folders = [], [], [], []
