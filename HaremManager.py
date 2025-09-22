@@ -1,4 +1,4 @@
-__version__ = (1,1,3)
+__version__ = (1,1,4)
 #░░░███░███░███░███░███
 #░░░░░█░█░░░░█░░█░░░█░█
 #░░░░█░░███░░█░░█░█░█░█
@@ -204,8 +204,8 @@ class HaremManager(loader.Module):
     async def _set_menu(self, message):
         await utils.answer(
             message,
-            "❤️ Выберите бота для управления\n\n✅ <i>- означает, что автобонус включён</i>\
-\n\nБольше настроек в конфиге модуля(<code>.config HaremManager</code>)",
+            f"❤️ Выберите бота для управления\n\n✅ <i>- означает, что автобонус включён</i>\
+\n\nБольше настроек в конфиге модуля(<code>{self.get_prefix()}config HaremManager</code>)",
             reply_markup=self._main_markup()
         )
 
