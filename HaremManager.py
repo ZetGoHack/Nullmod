@@ -1,4 +1,4 @@
-__version__ = (1,1,4)
+__version__ = (1,1,5)
 #░░░███░███░███░███░███
 #░░░░░█░█░░░░█░░█░░░█░█
 #░░░░█░░███░░█░░█░█░█░█
@@ -337,7 +337,7 @@ class HaremManager(loader.Module):
                             await asyncio.sleep(150)
                         for m in flyer_messages:
                             await asyncio.sleep(5)
-                            await m.click()
+                            await m.click(-1)
                             await asyncio.sleep(5)
                         for folder, chats in zip(folders, chats_in_folders):
                             await self.client(LeaveChatlistRequest(peers=chats, chatlist=folder))
