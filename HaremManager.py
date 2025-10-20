@@ -1,4 +1,4 @@
-__version__ = (1,1,5)
+__version__ = (1,1,6)
 #░░░███░███░███░███░███
 #░░░░░█░█░░░░█░░█░░░█░█
 #░░░░█░░███░░█░░█░█░█░█
@@ -328,7 +328,7 @@ class HaremManager(loader.Module):
                                             to_leave.append(entity.chat.id) if hasattr(entity,"chat") else to_leave.append(entity.id) if hasattr(entity,"id") else None
                                     elif hasattr(entity, "bot"):
                                         try:
-                                            await self.client(UnblockRequest(entity.username))
+                                            await self.client(UnblockRequest(entity.username if entity.username is not None else entity.usernames[0].username))
                                         except: print("блин")
                                         await self.client.send_message(entity, "/start")
                                         to_block.append(entity.username)
