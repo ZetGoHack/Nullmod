@@ -1,4 +1,4 @@
-__version__ = (1,1,6)
+__version__ = (1,1,7)
 #░░░███░███░███░███░███
 #░░░░░█░█░░░░█░░█░░░█░█
 #░░░░█░░███░░█░░█░█░█░█
@@ -327,11 +327,12 @@ class HaremManager(loader.Module):
                                         else:
                                             to_leave.append(entity.chat.id) if hasattr(entity,"chat") else to_leave.append(entity.id) if hasattr(entity,"id") else None
                                     elif hasattr(entity, "bot"):
+                                        username = entity.username if entity.username is not None else entity.usernames[0].username
                                         try:
-                                            await self.client(UnblockRequest(entity.username if entity.username is not None else entity.usernames[0].username))
+                                            await self.client(UnblockRequest(username))
                                         except: print("блин")
                                         await self.client.send_message(entity, "/start")
-                                        to_block.append(entity.username)
+                                        to_block.append(username)
                         flyer_messages = await self.client.get_messages(id, limit=1)
                         if wait_boost:
                             await asyncio.sleep(150)
