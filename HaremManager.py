@@ -304,7 +304,7 @@ class HaremManager(loader.Module):
                                                     pass
                                                 else:
                                                     if self.config["skip-requests"]:
-                                                        return
+                                                        continue
 
                                                     url = button.url.split("?")[0] if "?" in button.url else button.url
                                                     try:
