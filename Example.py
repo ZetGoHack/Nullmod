@@ -55,7 +55,7 @@
 # 1. Версия модуля. Длина кортежа не валидируется, но до Heroku 2.0.0
 #    невозможно было открыть .help у модулей с версией короче трёх элементов.
 #    Ради совместимости со старыми юзерботами лучше всегда указывать три элемента
-__version__ = ("beta", "test", 5) # будет отображено как "vbeta.test.5"
+__version__ = ("beta", "test", 6) # будет отображено как "vbeta.test.5"
 
 
 # 2. Разработчик - имя, юзернейм или канал разработчика модуля
@@ -409,6 +409,8 @@ class TheBestExampleEverMod(loader.Module):
 
         if (opt := self.config["example_option"]) != value:
             self.set("cfg_value", opt)
+        else:
+            return
 
         # endregion ДАТАБАЗА
 
