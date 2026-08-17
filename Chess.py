@@ -8,7 +8,7 @@ __version__ = (2, 0, 6)
 
 # meta developer: @nullmod
 # requires: python-chess gdown
-# packurl: https://github.com/SunnexGB/Nullmod/raw/main/langpacks/chess.yml
+# packurl: https://github.com/ZetGoHack/Nullmod/raw/main/langpacks/chess.yml
 # scope: hikka_min 6.7.67
 
 import asyncio
